@@ -9,7 +9,6 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -42,6 +41,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec light -A 3
 bindsym XF86MonBrightnessDown exec light -U 3
 
+#LOCKSCREEN
+bindsym $mod+l exec systemctl suspend
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -183,11 +184,14 @@ bindsym $mod+r mode "resize"
 
 # new stuff that i added :sunglasses:
 bindsym Print exec flameshot gui
-exec_always --no-startup-id picom --experimental-backends --backend glx 
+exec_always --no-startup-id picom -b --backend glx --experimental-backends 
 exec_always --no-startup-id dunst
-exec_always --no-startup-id feh --bg-scale "Downloads/bruhw.png"
+exec_always --no-startup-id feh --bg-scale "~/Downloads/bruhw.png"
 for_window [class=".*"] border pixel 0
 bindsym $mod+y sticky toggle
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
+bindsym Home exec playerctl --player=spotify play-pause
+bindsym End exec playerctl --player=spotify next
+bindsym $mod+p exec playerctl --player=spotify previous
+
